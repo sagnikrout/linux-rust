@@ -337,6 +337,13 @@ macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
 macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
 
 
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 // SPDX-License-Identifier: GPL-2.0-only

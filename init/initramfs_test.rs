@@ -337,6 +337,13 @@ macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
 macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
 
 
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -410,8 +417,8 @@ unsafe extern "C" fn initramfs_test_extract(test: *mut kunit)  {
     let mut err = core::ptr::null_mut();
     let mut cpio_srcbuf = core::ptr::null_mut();
     let mut len = 0;
-    let mut ts_before: timespec64 = unsafe { core::mem::zeroed() };
-    let mut ts_after: timespec64 = unsafe { core::mem::zeroed() };
+pub static mut ts_before: timespec64 = 0;
+pub static mut ts_after: timespec64 = 0;
 pub static mut st: kstat = 0;
 pub static mut initramfs_test_cpio: usize = 0;
 // +3 to cater for any 4-byte end-alignment
