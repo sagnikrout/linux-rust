@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -320,9 +349,7 @@ pub static mut sighand_struct: usize = 0;
 // init to 2 - one for init_task, one to ensure it is never freed
 pub static mut task_exec_state: usize = 0;
 
-    unsigned long init_shadow_call_stack[SCS_SIZE / sizeof!(long)] = {
-    [(SCS_SIZE / sizeof!(long)) - 1] = SCS_END_MAGIC
-    };
+pub static mut init_shadow_call_stack: usize = 0;
 
 // init to 2 - one for init_task, one to ensure it is never freed
 pub static mut init_groups: group_info = 0;
@@ -332,159 +359,13 @@ pub static mut init_groups: group_info = 0;
 pub static mut cred: usize = 0;
 //
 // Set up the first task table, touch at your own risk!. Base=0,
-limit=0x1fffff (=2MB)
+// limit=0x1fffff (=2MB)
 //
-    struct task_struct init_task __aligned(L1_CACHE_BYTES) = {
-
-    .thread_info	= INIT_THREAD_INFO(init_task),
-    .stack_refcount	= REFCOUNT_INIT(1),
-
-    .__state	= 0,
-    .stack		= init_stack,
-    .usage		= REFCOUNT_INIT(2),
-    .flags		= PF_KTHREAD,
-    .prio		= MAX_PRIO - 20,
-    .static_prio	= MAX_PRIO - 20,
-    .normal_prio	= MAX_PRIO - 20,
-    .policy		= SCHED_NORMAL,
-    .cpus_ptr	= &init_task.cpus_mask,
-    .user_cpus_ptr	= core::ptr::null_mut(),
-    .cpus_mask	= CPU_MASK_ALL,
-    .max_allowed_capacity	= SCHED_CAPACITY_SCALE,
-    .nr_cpus_allowed= NR_CPUS,
-    .mm		= core::ptr::null_mut(),
-    .active_mm	= &init_mm,
-    .exec_state	= &init_task_exec_state,
-    .restart_block	= {
-    .fn = do_no_restart_syscall,
-    },
-    .se		= {
-    .group_node 	= LIST_HEAD_INIT(init_task.se.group_node),
-    },
-    .rt		= {
-    .run_list	= LIST_HEAD_INIT(init_task.rt.run_list),
-    .time_slice	= RR_TIMESLICE,
-    },
-    .tasks		= LIST_HEAD_INIT(init_task.tasks),
-
-    .pushable_tasks	= PLIST_NODE_INIT(init_task.pushable_tasks, MAX_PRIO),
-
-    .sched_task_group = &root_task_group,
-
-    .scx		= {
-    .dsq_list.node	= LIST_HEAD_INIT(init_task.scx.dsq_list.node),
-    .sticky_cpu	= -1,
-    .holding_cpu	= -1,
-    .runnable_cpu	= -1,
-    .runnable_node	= LIST_HEAD_INIT(init_task.scx.runnable_node),
-    .runnable_at	= INITIAL_JIFFIES,
-    .ddsp_dsq_id	= SCX_DSQ_INVALID,
-    .slice		= SCX_SLICE_DFL,
-    },
-
-    .ptraced	= LIST_HEAD_INIT(init_task.ptraced),
-    .ptrace_entry	= LIST_HEAD_INIT(init_task.ptrace_entry),
-    .real_parent	= &init_task,
-    .parent		= &init_task,
-    .children	= LIST_HEAD_INIT(init_task.children),
-    .sibling	= LIST_HEAD_INIT(init_task.sibling),
-    .group_leader	= &init_task,
-    RCU_POINTER_INITIALIZER(real_cred, &init_cred),
-    RCU_POINTER_INITIALIZER(cred, &init_cred),
-    .comm		= INIT_TASK_COMM,
-    .thread		= INIT_THREAD,
-    .real_fs	= &init_fs,
-    .fs		= &init_fs,
-    .files		= &init_files,
-
-    .io_uring	= core::ptr::null_mut(),
-
-    .signal		= &init_signals,
-    .sighand	= &init_sighand,
-    .nsproxy	= &init_nsproxy,
-    .pending	= {
-    .list = LIST_HEAD_INIT(init_task.pending.list),
-    .signal = {{0}}
-    },
-    .blocked	= {{0}},
-    .alloc_lock	= __SPIN_LOCK_UNLOCKED(init_task.alloc_lock),
-    .journal_info	= core::ptr::null_mut(),
-    INIT_CPU_TIMERS(init_task)
-    .pi_lock	= __RAW_SPIN_LOCK_UNLOCKED(init_task.pi_lock),
-    .blocked_lock	= __RAW_SPIN_LOCK_UNLOCKED(init_task.blocked_lock),
-    .timer_slack_ns = 50000, /* 50 usec default slack */
-    .thread_pid	= &init_struct_pid,
-    .thread_node	= LIST_HEAD_INIT(init_signals.thread_head),
-
-    .loginuid	= INVALID_UID,
-    .sessionid	= AUDIT_SID_UNSET,
-
-    .perf_event_mutex = __MUTEX_INITIALIZER(init_task.perf_event_mutex),
-    .perf_event_list = LIST_HEAD_INIT(init_task.perf_event_list),
-
-    .rcu_read_lock_nesting = 0,
-    .rcu_read_unlock_special.s = 0,
-    .rcu_node_entry = LIST_HEAD_INIT(init_task.rcu_node_entry),
-    .rcu_blocked_node = core::ptr::null_mut(),
-
-    .rcu_tasks_holdout = false,
-    .rcu_tasks_holdout_list = LIST_HEAD_INIT(init_task.rcu_tasks_holdout_list),
-    .rcu_tasks_idle_cpu = -1,
-    .rcu_tasks_exit_list = LIST_HEAD_INIT(init_task.rcu_tasks_exit_list),
-
-    .trc_reader_nesting = 0,
-
-    .mems_allowed_seq = SEQCNT_SPINLOCK_ZERO(init_task.mems_allowed_seq,
-    &init_task.alloc_lock),
-
-    .blocked_donor = core::ptr::null_mut(),
-
-    .pi_waiters	= RB_ROOT_CACHED,
-    .pi_top_task	= core::ptr::null_mut(),
-
-    INIT_PREV_CPUTIME(init_task)
-
-    .vtime.seqcount	= SEQCNT_ZERO(init_task.vtime_seqcount),
-    .vtime.starttime = 0,
-    .vtime.state	= VTIME_SYS,
-
-    .numa_preferred_nid = NUMA_NO_NODE,
-    .numa_group	= core::ptr::null_mut(),
-    .numa_faults	= core::ptr::null_mut(),
-
-    .preferred_llc  = -1,
-    .pref_llc_queued  = 0,
-
-    .kasan_depth	= 1,
-
-    .kcsan_ctx = {
-    .scoped_accesses	= {LIST_POISON1, core::ptr::null_mut()},
-    },
-
-    .softirqs_enabled = 1,
-
-    .lockdep_depth = 0, /* no locks held yet */
-    .curr_chain_key = INITIAL_CHAIN_KEY,
-    .lockdep_recursion = 0,
-
-    .ret_stack		= core::ptr::null_mut(),
-    .tracing_graph_pause	= ATOMIC_INIT(0),
-
-    .trace_recursion = 0,
-
-    .patch_state	= KLP_TRANSITION_IDLE,
-
-    .security	= core::ptr::null_mut(),
-
-    .seccomp	= { .filter_count = ATOMIC_INIT(0) },
-
-    .mm_cid		= { .cid = MM_CID_UNSET, },
-
-    };
-    EXPORT_SYMBOL(init_task);
+pub static mut init_task: usize = 0;
+    EXPORT_SYMBOL!(init_task);
 //
 // Initial thread structure. Alignment of this is handled by a special
 // linker map entry.
 //
 
-pub static mut __init_thread_info: thread_info init_thread_info = 0;
+pub static mut __init_thread_info: usize = 0;

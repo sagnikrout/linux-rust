@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -335,66 +364,26 @@ pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // operations which are not allowed with IRQ disabled are allowed while the
 // flag is set.
 //
-    let mut early_boot_irqs_disabled = 0;
-    enum system_states system_state ;
-    EXPORT_SYMBOL(system_state);
+    pub static mut early_boot_irqs_disabled: usize = 0;
+pub static mut system_state: c_int = 0;
+    EXPORT_SYMBOL!(system_state);
 //
 // Boot command-line arguments
 //
 
 // Default late time init is NULL. archs can override this later.
-    void (*__initdata late_time_init)(void);
+pub static mut late_time_init: usize = 0;
 // Untouched command line saved by arch-specific code.
-    char __initdata boot_command_line[COMMAND_LINE_SIZE];
-// Untouched saved command line (eg. for /proc)
-pub static mut saved_command_line: *mut c_void = core::ptr::null_mut();
-    unsigned int saved_command_line_len __ro_after_init;
-// Command line for parameter parsing
-pub static mut static_command_line: *mut c_void = core::ptr::null_mut();
-// Untouched extra command line
-pub static mut extra_command_line: *mut c_void = core::ptr::null_mut();
-// Extra init arguments
-pub static mut extra_init_args: *mut c_void = core::ptr::null_mut();
-
-// Is bootconfig on command line?
-    static bool bootconfig_found;
-    static size_t initargs_offs;
-
-pub static mut execute_command: *mut c_void = core::ptr::null_mut();
-    static char *ramdisk_execute_command = "/init";
-    static bool __initdata ramdisk_execute_command_set;
-//
-// Used to generate warnings if static_key manipulation functions are used
-// before jump_label_init is called.
-//
-    let mut static_key_initialized = 0;
-    EXPORT_SYMBOL_GPL(static_key_initialized);
-//
-// If set, this is an indication to the drivers that reset the underlying
-// device before going ahead with the initialization otherwise driver might
-// rely on the BIOS and skip the reset operation.
-//
-// This is useful if kernel is booting in an unreliable environment.
-// For ex. kdump situation where previous kernel has crashed, BIOS has been
-// skipped and devices will be in unknown state.
-//
-    let mut reset_devices = 0;
-    EXPORT_SYMBOL(reset_devices);
+pub static mut boot_command_line: usize = 0;
+pub static mut envp_init: usize = 0;
+pub static mut panic_later: *mut c_char = core::ptr::null_mut();
+pub static mut panic_param: *mut c_char = core::ptr::null_mut();
 #[no_mangle]
-unsafe extern "C" fn set_reset_devices(str: *mut c_char) -> c_int {
-    reset_devices = 1;
-    return 1;
-    }
-    __setup!("reset_devices", set_reset_devices);
-    static const char *argv_init[MAX_INIT_ARGS+2] = { "init", core::ptr::null_mut(), };
-    const char *envp_init[MAX_INIT_ENVS+2] = { "HOME=/", "TERM=linux", core::ptr::null_mut(), };
-    static const char *panic_later, *panic_param;
-#[no_mangle]
-unsafe extern "C" fn obsolete_checksetup(line: *mut c_char) -> bool __init {
+unsafe extern "C" fn obsolete_checksetup(line: *mut c_char) -> bool  {
 pub static mut p: *mut c_void = core::ptr::null_mut();
 pub static mut had_early_param: bool = false;
     p = __setup_start;
-    do {
+    loop {
 pub static mut n: c_int = 0;
     if (parameqn(line, p.str, n)) {
     if (p.early) {
@@ -414,7 +403,7 @@ pub static mut n: c_int = 0;
     }
     }
     p += 1;
-    } while (p < __setup_end);
+    break; }
     return had_early_param;
     }
 //
@@ -422,7 +411,7 @@ pub static mut n: c_int = 0;
 // still work even if initially too large, it will just take slightly longer
 //
 pub static mut loops_per_jiffy: c_ulong = 0;
-    EXPORT_SYMBOL(loops_per_jiffy);
+    EXPORT_SYMBOL!(loops_per_jiffy);
 #[no_mangle]
 unsafe extern "C" fn debug_kernel(str: *mut c_char) -> c_int {
     console_loglevel = CONSOLE_LOGLEVEL_DEBUG;
@@ -453,7 +442,8 @@ unsafe extern "C" fn loglevel(str: *mut c_char) -> c_int {
 
 #[no_mangle]
 unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut c_void {
-    u32 size, csum;
+pub static mut size: usize = 0;
+pub static mut csum: usize = 0;
 pub static mut data: *mut c_void = core::ptr::null_mut();
 pub static mut hdr: *mut c_void = core::ptr::null_mut();
     let mut i = 0;
@@ -477,7 +467,7 @@ pub static mut hdr: *mut c_void = core::ptr::null_mut();
     size = get_unaligned_le32(hdr);
     csum = get_unaligned_le32(hdr + 4);
     data = (hdr) - size;
-    if ((unsigned long)data < initrd_start) {
+    if (data < initrd_start) {
     pr_err!("bootconfig size %d is greater than initrd size %ld\n",
     size, initrd_end - initrd_start);
     return core::ptr::null_mut();
@@ -487,7 +477,7 @@ pub static mut hdr: *mut c_void = core::ptr::null_mut();
     return core::ptr::null_mut();
     }
 // Remove bootconfig from initramfs/initrd
-    initrd_end = (unsigned long)data;
+    initrd_end = data;
     if (_size) {
 // _size = size;
     }
@@ -501,10 +491,11 @@ unsafe extern "C" fn get_boot_config_from_initrd(_size: *mut usize) -> *mut c_vo
 
 // Make an extra command line under given key word
 #[no_mangle]
-unsafe extern "C" fn xbc_make_cmdline(key: *const c_char) -> *mut char  __init {
+unsafe extern "C" fn xbc_make_cmdline(key: *const c_char) -> *mut char   {
 pub static mut root: *mut c_void = core::ptr::null_mut();
 pub static mut new_cmdline: *mut c_void = core::ptr::null_mut();
-    int ret, len = 0;
+    let mut ret = 0;
+    let mut len = 0;
     root = xbc_find_node(key);
     if (!root) {
     return core::ptr::null_mut();
@@ -566,7 +557,7 @@ pub static mut from_embedded: bool = false;
     }
     if (size >= XBC_DATA_MAX) {
     pr_err!("bootconfig size %ld greater than max size %d\n",
-    (long)size, XBC_DATA_MAX);
+    size, XBC_DATA_MAX);
     return;
     }
     ret = xbc_init(data, size, &msg, &pos);
@@ -580,7 +571,7 @@ pub static mut from_embedded: bool = false;
     }
     } else {
     xbc_get_info(&ret, core::ptr::null_mut());
-    pr_info!("Load bootconfig: %ld bytes %d nodes\n", (long)size, ret);
+    pr_info!("Load bootconfig: %ld bytes %d nodes\n", size, ret);
 //
 // keys starting with "kernel." are passed via cmdline. When
 // this bootconfig came from the embedded source and
@@ -623,7 +614,7 @@ unsafe extern "C" fn warn_bootconfig(str: *mut c_char) -> c_int {
 
     early_param!("bootconfig", warn_bootconfig);
 #[no_mangle]
-pub unsafe extern "C" fn cmdline_has_extra_options() -> bool __init {
+pub unsafe extern "C" fn cmdline_has_extra_options() -> bool  {
     return extra_command_line || extra_init_args;
     }
 // Change NUL term back to "=", to make "param" the whole string.
@@ -643,9 +634,8 @@ if true {
     }
     }
 // Anything after -- gets handed straight to init.
-    static int __init set_init_arg(char *param, char *val,
-    const char *unused, void *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn set_init_arg(param: *mut c_char, val: *mut c_char, unused: *mut c_char, arg: *mut c_void) -> c_int {
     let mut i = 0;
     if (panic_later) {
     return 0;
@@ -665,16 +655,15 @@ if true {
 // Unknown boot options get handed to init, unless they look like
 // unused parameters (modprobe will find them in /proc/cmdline).
 //
-    static int __init unknown_bootoption(char *param, char *val,
-    const char *unused, void *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn unknown_bootoption(param: *mut c_char, val: *mut c_char, unused: *mut c_char, arg: *mut c_void) -> c_int {
 pub static mut len: usize = 0;
 //
 // Well-known bootloader identifiers:
 // 1. LILO/Grub pass "BOOT_IMAGE=...";
 // 2. kexec/kdump (kexec-tools) pass "kexec".
 //
-    const char *bootloader[] = { "BOOT_IMAGE=", "kexec", core::ptr::null_mut() };
+pub static mut bootloader: usize = 0;
 // Handle params aliased to sysctls
     if (sysctl_is_alias(param)) {
     return 0;
@@ -765,7 +754,9 @@ pub unsafe extern "C" fn smp_prepare_cpus(maxcpus: c_uint) { }
 //
 #[no_mangle]
 unsafe extern "C" fn setup_command_line(command_line: *mut c_char)  {
-    size_t len, xlen = 0, ilen = 0;
+    let mut len = 0;
+    let mut xlen = 0;
+    let mut ilen = 0;
     if (extra_command_line) {
     xlen = strlen(extra_command_line);
     }
@@ -812,16 +803,16 @@ unsafe extern "C" fn setup_command_line(command_line: *mut c_char)  {
     saved_command_line_len = strlen(saved_command_line);
     }
 //
-// We need to finalize in a non-__init function or else race conditions
+// We need to finalize in a non- function or else race conditions
 // between the root thread and the init thread may cause start_kernel to
 // be reaped by free_initmem before the root thread has proceeded to
 // cpu_idle.
 //
 // gcc-3.4 accidentally inlines this function, so use noinline.
 //
-    static __initdata DECLARE_COMPLETION(kthreadd_done);
+pub static mut kthreadd_done: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn rest_init() -> noinline void __ref __noreturn {
+unsafe extern "C" fn rest_init()    {
 pub static mut kernel_clone_args: usize = 0;
 pub static mut tsk: *mut c_void = core::ptr::null_mut();
     let mut pid = 0;
@@ -865,9 +856,8 @@ pub static mut tsk: *mut c_void = core::ptr::null_mut();
     cpu_startup_entry(CPUHP_ONLINE);
     }
 // Check for early params.
-    static int __init do_early_param(char *param, char *val,
-    const char *unused, void *arg)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn do_early_param(param: *mut c_char, val: *mut c_char, unused: *mut c_char, arg: *mut c_void) -> c_int {
 pub static mut p: *mut c_void = core::ptr::null_mut();
     while (p < __setup_end) {
     if (p.early && parameq(param, p.str)) {
@@ -887,594 +877,29 @@ pub unsafe extern "C" fn parse_early_options(cmdline: *mut c_char)  {
 // Arch code calls this early on, or if not, just before other parsing.
 #[no_mangle]
 pub unsafe extern "C" fn parse_early_param()  {
-    static int done __initdata;
-    static char tmp_cmdline[COMMAND_LINE_SIZE] __initdata;
-    if (done) {
-    return;
-    }
-// All fall through to do_early_param.
-    strscpy(tmp_cmdline, boot_command_line, COMMAND_LINE_SIZE);
-    parse_early_options(tmp_cmdline);
-    done = 1;
-    }
-    void __init __weak arch_post_acpi_subsys_init(void) { }
-#[no_mangle]
-pub unsafe extern "C" fn smp_setup_processor_id()  __weak {
-    }
-#[no_mangle]
-pub unsafe extern "C" fn smp_prepare_boot_cpu()  __weak {
-    }
-
-#[no_mangle]
-pub unsafe extern "C" fn thread_stack_cache_init()  __weak {
-    }
-
-    void __init __weak poking_init(void) { }
-    void __init __weak pgtable_cache_init(void) { }
-    void __init __weak trap_init(void) { }
-    let mut initcall_debug = 0;
-    core_param!(initcall_debug, initcall_debug, bool, 0644);
-
-    static void __init initcall_debug_enable(void);
-
-#[no_mangle]
-pub unsafe extern "C" fn initcall_debug_enable() {
-    }
-
-pub static mut CONFIG_RANDOMIZE_KSTACK_OFFSET_DEFAULT: usize = 0;
-pub static mut struct rnd_state: usize = 0;
-#[no_mangle]
-unsafe extern "C" fn random_kstack_init() -> c_int {
-    prandom_seed_full_state(&kstack_rnd_state);
-    return 0;
-    }
-    late_initcall!(random_kstack_init);
-#[no_mangle]
-unsafe extern "C" fn early_randomize_kstack_offset(buf: *mut c_char) -> c_int {
-    let mut ret = 0;
-    let mut bool_result = 0;
-    ret = kstrtobool(buf, &bool_result);
-    if (ret) {
-    return ret;
-    }
-    if (bool_result) {
-    static_branch_enable(&randomize_kstack_offset);
-    }
-    else {
-    static_branch_disable(&randomize_kstack_offset);
-    }
-    return 0;
-    }
-    early_param!("randomize_kstack_offset", early_randomize_kstack_offset);
-
-#[no_mangle]
-unsafe extern "C" fn print_unknown_bootoptions()  {
-pub static mut unknown_options: *mut c_void = core::ptr::null_mut();
-pub static mut end: *mut c_void = core::ptr::null_mut();
-    const char *const *p;
-    let mut len = 0;
-    if (panic_later || (!argv_init[1] && !envp_init[2])) {
-    return;
-    }
-//
-// Determine how many options we have to print out, plus a space
-// before each
-//
-    len = 1; /* null terminator */
-    while (*p) {
-    len += 1;
-    len += strlen(*p);
-    }
-    while (*p) {
-    len += 1;
-    len += strlen(*p);
-    }
-    unknown_options = memblock_alloc(len, SMP_CACHE_BYTES);
-    if (!unknown_options) {
-    pr_err!("%s: Failed to allocate %zu bytes\n",
-    __func__, len);
-    return;
-    }
-    end = unknown_options;
-    while (*p) {
-    end += sprintf(end, " %s", *p);
-    }
-    while (*p) {
-    end += sprintf(end, " %s", *p);
-    }
-// Start at unknown_options[1] to skip the initial space
-    pr_notice("Unknown kernel command line parameters \"%s\", will be passed to user space.\n",
-    &unknown_options[1]);
-    memblock_free(unknown_options, len);
-    }
-#[no_mangle]
-unsafe extern "C" fn early_numa_node_init()  {
-
-    let mut cpu = 0;
-// The early_cpu_to_node() should be ready here.
-    for_each_possible_cpu(cpu) {
-    set_cpu_numa_node(cpu, early_cpu_to_node(cpu));
-    }
-
-    }
-
-    KERNEL_CMDLINE_CONTINUATION_LEN)
-
-    MIN_CMDLINE_LOG_WRAP_IDEAL_LEN ? 
-    CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN : 
-    MIN_CMDLINE_LOG_WRAP_IDEAL_LEN)
-
-//
-// print_kernel_cmdline() - Print the kernel cmdline with wrapping.
-// @cmdline: The cmdline to print.
-//
-// Print the kernel command line, trying to wrap based on the Kconfig knob
-// CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN.
-//
-// Wrapping is based on spaces, ignoring quotes. All lines are prefixed
-// with "Kernel command line: " and lines that are not the last line have
-// a " \" suffix added to them. The prefix and suffix count towards the
-// line length for wrapping purposes. The ideal length will be exceeded
-// if no appropriate place to wrap is found.
-//
-// Example output if CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN is 40:
-// Kernel command line: loglevel=7 
-// Kernel command line: init=/sbin/init 
-// Kernel command line: root=PARTUUID=8c3efc1a-768b-6642-8d0c-89eb782f19f0/PARTNROFF=1 
-// Kernel command line: rootwait ro 
-// Kernel command line: my_quoted_arg="The 
-// Kernel command line: quick brown fox 
-// Kernel command line: jumps over the 
-// Kernel command line: lazy dog."
-//
-#[no_mangle]
-unsafe extern "C" fn print_kernel_cmdline(cmdline: *const c_char)  {
-    let mut len = 0;
-// Config option of 0 or anything longer than the max disables wrapping
-    if (CONFIG_CMDLINE_LOG_WRAP_IDEAL_LEN == 0 ||
-    IDEAL_CMDLINE_LEN >= COMMAND_LINE_SIZE - 1) {
-    pr_notice("%s%s\n", KERNEL_CMDLINE_PREFIX, cmdline);
-    return;
-    }
-    len = strlen(cmdline);
-    while (len > IDEAL_CMDLINE_LEN) {
-pub static mut first_space: *mut c_void = core::ptr::null_mut();
-pub static mut prev_cutoff: *mut c_void = core::ptr::null_mut();
-pub static mut cutoff: *mut c_void = core::ptr::null_mut();
-    let mut to_print = 0;
-    let mut used = 0;
-// Find the last ' ' that wouldn't make the line too long
-    prev_cutoff = core::ptr::null_mut();
-    cutoff = cmdline;
-    while (true) {
-    cutoff = strchr(cutoff + 1, ' ');
-    if (!cutoff || cutoff - cmdline > IDEAL_CMDLINE_SPLIT_LEN) {
-    break;
-    }
-    prev_cutoff = cutoff;
-    }
-    if (prev_cutoff) {
-    cutoff = prev_cutoff;
-    }
-
-    else if (!cutoff) {
-    break;
-    }
-// Find the beginning and end of the string of spaces
-    first_space = cutoff;
-    while (first_space > cmdline && first_space[-1] == ' ') {
-    first_space -= 1;
-    }
-    to_print = first_space - cmdline;
-    while (*cutoff == ' ') {
-    cutoff += 1;
-    }
-    used = cutoff - cmdline;
-// If the whole string is used, break and do the final printout
-    if (len == used) {
-    break;
-    }
-    if (to_print) {
-    pr_notice("%s%.*s%s\n", KERNEL_CMDLINE_PREFIX,
-    to_print, cmdline, KERNEL_CMDLINE_CONTINUATION);
-    }
-    len -= used;
-    cmdline += used;
-    }
-    if (len) {
-    pr_notice("%s%s\n", KERNEL_CMDLINE_PREFIX, cmdline);
-    }
-    }
-    asmlinkage __visible __init __no_sanitize_address __noreturn __no_stack_protector
-#[no_mangle]
-pub unsafe extern "C" fn start_kernel() {
-pub static mut command_line: *mut c_void = core::ptr::null_mut();
-pub static mut after_dashes: *mut c_void = core::ptr::null_mut();
-    set_task_stack_end_magic(&init_task);
-    smp_setup_processor_id();
-    debug_objects_early_init();
-    init_vmlinux_build_id();
-    cgroup_init_early();
-    local_irq_disable();
-    early_boot_irqs_disabled = true;
-//
-// Interrupts are still disabled. Do necessary setups, then
-// enable them.
-//
-    boot_cpu_init();
-    page_address_init();
-    pr_notice("%s", linux_banner);
-    setup_arch(&command_line);
-    mm_core_init_early();
-// Static keys and static calls are needed by LSMs
-    jump_label_init();
-    static_call_init();
-    early_security_init();
-    setup_boot_config();
-    setup_command_line(command_line);
-    setup_nr_cpu_ids();
-    setup_per_cpu_areas();
-    smp_prepare_boot_cpu();	/* arch-specific boot-cpu hooks */
-    early_numa_node_init();
-    boot_cpu_hotplug_init();
-    print_kernel_cmdline(saved_command_line);
-// parameters may set static keys
-    parse_early_param();
-    after_dashes = parse_args("Booting kernel",
-    static_command_line, __start___param,
-    __stop___param - __start___param,
-    -1, -1, core::ptr::null_mut(), &unknown_bootoption);
-    print_unknown_bootoptions();
-    if (!IS_ERR_OR_NULL(after_dashes)) {
-    parse_args("Setting init args", after_dashes, core::ptr::null_mut(), 0, -1, -1,
-    core::ptr::null_mut(), set_init_arg);
-    }
-    if (extra_init_args) {
-    parse_args("Setting extra init args", extra_init_args,
-    core::ptr::null_mut(), 0, -1, -1, core::ptr::null_mut(), set_init_arg);
-    }
-// Architectural and non-timekeeping rng init, before allocator init
-    random_init_early(command_line);
-//
-// These use large bootmem allocations and must precede
-// initalization of page allocator
-//
-    setup_log_buf(0);
-    vfs_caches_init_early();
-    sort_main_extable();
-    trap_init();
-    mm_core_init();
-    maple_tree_init();
-    poking_init();
-    ftrace_init();
-// trace_printk can be enabled here
-    early_trace_init();
-//
-// Set up the scheduler prior starting any interrupts (such as the
-// timer interrupt). Full topology setup happens at smp_init()
-// time - but meanwhile we still have a functioning scheduler.
-//
-    sched_init();
-    if (WARN(!irqs_disabled(),
-    "Interrupts were enabled *very* early, fixing it\n")) {
-    local_irq_disable();
-    }
-    radix_tree_init();
-//
-// Set up housekeeping before setting up workqueues to allow the unbound
-// workqueue to take non-housekeeping into account.
-//
-    housekeeping_init();
-//
-// Allow workqueue creation and work item queueing/cancelling
-// early.  Work item execution depends on kthreads and starts after
-// workqueue_init().
-//
-    workqueue_init_early();
-    rcu_init();
-    kvfree_rcu_init();
-// Trace events are available after this
-    trace_init();
-    if (initcall_debug) {
-    initcall_debug_enable();
-    }
-    context_tracking_init();
-// init some links before init_ISA_irqs()
-    early_irq_init();
-    init_IRQ();
-    tick_init();
-    rcu_init_nohz();
-    timers_init();
-    srcu_init();
-    hrtimers_init();
-    softirq_init();
-    vdso_setup_data_pages();
-    timekeeping_init();
-    time_init();
-// This must be after timekeeping is initialized
-    random_init();
-// These make use of the fully initialized rng
-    kfence_init();
-    boot_init_stack_canary();
-    perf_event_init();
-    profile_init();
-    call_function_init();
-    WARN(!irqs_disabled(), "Interrupts were enabled early\n");
-    early_boot_irqs_disabled = false;
-    local_irq_enable();
-    kmem_cache_init_late();
-//
-// HACK ALERT! This is early. We're enabling the console before
-// we've done PCI setups etc, and console_init() must be aware of
-// this. But we do want output early, in case something goes wrong.
-//
-    console_init();
-    if (panic_later) {
-    panic("Too many boot %s vars at `%s'", panic_later,
-    panic_param);
-    }
-    lockdep_init();
-//
-// Need to run this when irqs are enabled, because it wants
-// to self-test [hard/soft]-irqs on/off lock inversion bugs
-// too:
-//
-    locking_selftest();
-
-    if (initrd_start && !initrd_below_start_ok &&
-    page_to_pfn(virt_to_page(initrd_start)) < min_low_pfn) {
-    pr_crit("initrd overwritten (0x%08lx < 0x%08lx) - disabling it.\n",
-    page_to_pfn(virt_to_page(initrd_start)),
-    min_low_pfn);
-    initrd_start = 0;
-    }
-
-    setup_per_cpu_pageset();
-    numa_policy_init();
-    acpi_early_init();
-    if (late_time_init) {
-    late_time_init();
-    }
-    sched_clock_init();
-    calibrate_delay();
-    arch_cpu_finalize_init();
-    pid_idr_init();
-    anon_vma_init();
-    thread_stack_cache_init();
-    cred_init();
-    fork_init();
-    proc_caches_init();
-    uts_ns_init();
-    time_ns_init();
-    key_init();
-    security_init();
-    dbg_late_init();
-    net_ns_init();
-    vfs_caches_init();
-    pagecache_init();
-    signals_init();
-    seq_file_init();
-    proc_root_init();
-    nsfs_init();
-    pidfs_init();
-    cpuset_init();
-    mem_cgroup_init();
-    cgroup_init();
-    taskstats_init_early();
-    delayacct_init();
-    acpi_subsystem_init();
-    arch_post_acpi_subsys_init();
-    kcsan_init();
-// Do the rest non-__init'ed, we're now alive
-    rest_init();
-//
-// Avoid stack canaries in callers of boot_init_stack_canary for gcc-10
-// and older.
-//
-
-    prevent_tail_call_optimization();
-
-    }
-// Call all constructor functions linked into the kernel.
-#[no_mangle]
-unsafe extern "C" fn do_ctors()  {
-//
-// For UML, the constructors have already been called by the
-// normal setup code as it's just a normal ELF binary, so we
-// cannot do it again - but we do need CONFIG_CONSTRUCTORS
-// even on UML for modules.
-//
-
-    let mut fn =  __ctors_start;
-    while (fn <  __ctors_end) {
-    (*fn)();
-    }
-
-    }
-
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct blacklist_entry {
-    pub next: list_head,
-    pub buf: *mut c_char,
-}
-
-    static __initdata_or_module LIST_HEAD(blacklisted_initcalls);
-#[no_mangle]
-unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> c_int {
-pub static mut str_entry: *mut c_void = core::ptr::null_mut();
-pub static mut entry: *mut c_void = core::ptr::null_mut();
-// str argument is a comma-separated list of functions
-    do {
-    str_entry = strsep(&str, ",");
-    if (str_entry) {
-    pr_debug!("blacklisting initcall %s\n", str_entry);
-    entry = memblock_alloc_or_panic(sizeof!(*entry),
-    SMP_CACHE_BYTES);
-    entry.buf = memblock_alloc_or_panic(strlen(str_entry) + 1,
-    SMP_CACHE_BYTES);
-    strcpy(entry.buf, str_entry);
-    list_add(&entry.next, &blacklisted_initcalls);
-    }
-    } while (str_entry);
-    return 1;
-    }
-#[no_mangle]
-unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_module {
-pub static mut entry: *mut c_void = core::ptr::null_mut();
-    char fn_name[KSYM_SYMBOL_LEN];
-    let mut addr = 0;
-    if (list_empty(&blacklisted_initcalls)) {
-    return false;
-    }
-    addr = (unsigned long) dereference_function_descriptor(fn);
-    sprint_symbol_no_offset(fn_name, addr);
-//
-// fn will be "function_name [module_name]" where [module_name] is not
-// displayed for built-in init functions.  Strip off the [module_name].
-//
-    strreplace(fn_name, ' ', '\0');
-    list_for_each_entry(entry, &blacklisted_initcalls, next) {
-    if (!strcmp(fn_name, entry.buf)) {
-    pr_debug!("initcall %s blacklisted\n", fn_name);
-    return true;
-    }
-    }
-    return false;
-    }
-
-#[no_mangle]
-unsafe extern "C" fn initcall_blacklist(str: *mut c_char) -> c_int {
-    pr_warn!("initcall_blacklist requires CONFIG_KALLSYMS\n");
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn initcall_blacklisted(fn: initcall_t) -> bool __init_or_module {
-    return false;
-    }
-
-    __setup!("initcall_blacklist=", initcall_blacklist);
-    static __init_or_module void
-    trace_initcall_start_cb!(void *data, initcall_t fn)
-    {
-    let mut calltime = data;
-    printk!("calling  %pS @ %i\n", fn, task_pid_nr(current));
-// calltime = ktime_get();
-    }
-    static __init_or_module void
-    trace_initcall_finish_cb!(void *data, initcall_t fn, int ret)
-    {
-    ktime_t rettime, *calltime = data;
-    rettime = ktime_get();
-    printk!("initcall %pS returned %d after %lld usecs\n",
-    fn, ret, (unsigned long long)ktime_us_delta(rettime, *calltime));
-    }
-    static __init_or_module void
-    trace_initcall_level_cb!(void *data, const char *level)
-    {
-    printk!("entering initcall level: %s\n", level);
-    }
-    static ktime_t initcall_calltime;
-
-#[no_mangle]
-unsafe extern "C" fn initcall_debug_enable()  {
-    let mut ret = 0;
-    ret = register_trace_initcall_start!(trace_initcall_start_cb,
-    &initcall_calltime);
-    ret |= register_trace_initcall_finish!(trace_initcall_finish_cb,
-    &initcall_calltime);
-    ret |= register_trace_initcall_level!(trace_initcall_level_cb, core::ptr::null_mut());
-    WARN(ret, "Failed to register initcall tracepoints\n");
-    }
-
-#[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_start!(fn: initcall_t) {
-    if (!initcall_debug) {
-    return;
-    }
-    trace_initcall_start_cb!(&initcall_calltime, fn);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_finish!(fn: initcall_t, ret: c_int) {
-    if (!initcall_debug) {
-    return;
-    }
-    trace_initcall_finish_cb!(&initcall_calltime, fn, ret);
-    }
-#[no_mangle]
-pub unsafe extern "C" fn do_trace_initcall_level!(level: *const c_char) {
-    if (!initcall_debug) {
-    return;
-    }
-    trace_initcall_level_cb!(core::ptr::null_mut(), level);
-    }
-
-#[no_mangle]
-pub unsafe extern "C" fn do_one_initcall!(fn: initcall_t) -> c_int_or_module {
-pub static mut count: c_int = 0;
-    char msgbuf[64];
-    let mut ret = 0;
-    if (initcall_blacklisted(fn)) {
-    return -EPERM;
-    }
-    do_trace_initcall_start!(fn);
-    ret = fn();
-    do_trace_initcall_finish!(fn, ret);
-    msgbuf[0] = 0;
-    if (preempt_count() != count) {
-    sprintf(msgbuf, "preemption imbalance ");
-    preempt_count_set(count);
-    }
-    if (irqs_disabled()) {
-    strlcat(msgbuf, "disabled interrupts ", sizeof!(msgbuf));
-    local_irq_enable();
-    }
-    WARN(msgbuf[0], "initcall %pS returned with %s\n", fn, msgbuf);
-    add_latent_entropy();
-    return ret;
-    }
-    static initcall_entry_t *initcall_levels[] __initdata = {
-    __initcall0_start,
-    __initcall1_start,
-    __initcall2_start,
-    __initcall3_start,
-    __initcall4_start,
-    __initcall5_start,
-    __initcall6_start,
-    __initcall7_start,
-    __initcall_end,
-    };
+pub static mut done: usize = 0;
+pub static mut tmp_cmdline: usize = 0;
 // Keep these in sync with initcalls in include/linux/init.h
-    static const char *initcall_level_names[] __initdata = {
-    "pure",
-    "core",
-    "postcore",
-    "arch",
-    "subsys",
-    "fs",
-    "device",
-    "late",
-    };
-    static int __init ignore_unknown_bootoption(char *param, char *val,
-    const char *unused, void *arg)
-    {
+pub static mut initcall_level_names: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn ignore_unknown_bootoption(param: *mut c_char, val: *mut c_char, unused: *mut c_char, arg: *mut c_void) -> c_int {
     return 0;
     }
 #[no_mangle]
-unsafe extern "C" fn do_initcall_level!(level: c_int, command_line: *mut c_char)  {
-pub static mut fn: *mut c_void = core::ptr::null_mut();
+unsafe extern "C" fn do_initcall_level(level: c_int, command_line: *mut c_char)  {
+pub static mut r#fn: *mut c_void = core::ptr::null_mut();
     parse_args(initcall_level_names[level],
     command_line, __start___param,
     __stop___param - __start___param,
     level, level,
     core::ptr::null_mut(), ignore_unknown_bootoption);
-    do_trace_initcall_level!(initcall_level_names[level]);
-    while (fn < initcall_levels[level+1]) {
-    do_one_initcall!(initcall_from_entry(fn));
+    do_trace_initcall_level(initcall_level_names[level]);
+    while (r#fn < initcall_levels[level+1]) {
+    do_one_initcall(initcall_from_entry(r#fn));
     }
     }
 #[no_mangle]
-unsafe extern "C" fn do_initcalls!()  {
+unsafe extern "C" fn do_initcalls()  {
     let mut level = 0;
 pub static mut len: usize = 0;
 pub static mut command_line: *mut c_void = core::ptr::null_mut();
@@ -1485,7 +910,7 @@ pub static mut command_line: *mut c_void = core::ptr::null_mut();
     while (level < ARRAY_SIZE!(initcall_levels) - 1) {
 // Parser modifies command_line, restore it each time
     strcpy(command_line, saved_command_line);
-    do_initcall_level!(level, command_line);
+    do_initcall_level(level, command_line);
     }
     kfree(command_line);
     }
@@ -1503,19 +928,19 @@ unsafe extern "C" fn do_basic_setup()  {
     driver_init();
     init_irq_proc();
     do_ctors();
-    do_initcalls!();
+    do_initcalls();
     }
 #[no_mangle]
-unsafe extern "C" fn do_pre_smp_initcalls!()  {
-pub static mut fn: *mut c_void = core::ptr::null_mut();
-    do_trace_initcall_level!("early");
-    while (fn < __initcall0_start) {
-    do_one_initcall!(initcall_from_entry(fn));
+unsafe extern "C" fn do_pre_smp_initcalls()  {
+pub static mut r#fn: *mut c_void = core::ptr::null_mut();
+    do_trace_initcall_level("early");
+    while (r#fn < __initcall0_start) {
+    do_one_initcall(initcall_from_entry(r#fn));
     }
     }
 #[no_mangle]
 unsafe extern "C" fn run_init_process(init_filename: *const c_char) -> c_int {
-    const char *const *p;
+    let mut p = core::ptr::null_mut();
     argv_init[0] = init_filename;
     pr_info!("Run %s as init process\n", init_filename);
     pr_debug!("  with arguments:\n");
@@ -1538,9 +963,9 @@ unsafe extern "C" fn try_to_run_init_process(init_filename: *const c_char) -> c_
     }
     return ret;
     }
-    static noinline void __init kernel_init_freeable(void);
+// forward_decl: kernel_init_freeable;
 
-pub static mut __ro_after_init: bool rodata_enabled = true;
+pub static mut rodata_enabled: bool = true;
 
 #[no_mangle]
 pub unsafe extern "C" fn arch_parse_debug_rodata(str: *mut c_char) -> bool { return false; }
@@ -1587,11 +1012,11 @@ unsafe extern "C" fn mark_readonly() {
     }
     }
 #[no_mangle]
-pub unsafe extern "C" fn free_initmem() -> void __weak {
+pub unsafe extern "C" fn free_initmem()   {
     free_initmem_default(POISON_FREE_INITMEM);
     }
 #[no_mangle]
-unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
+unsafe extern "C" fn kernel_init(unused: *mut c_void) -> c_int  {
     let mut ret = 0;
     init_userspace_fs();
 //
@@ -1599,7 +1024,7 @@ unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
 //
     wait_for_completion(&kthreadd_done);
     kernel_init_freeable();
-// need to finish all async __init code before freeing the memory
+// need to finish all async  code before freeing the memory
     async_synchronize_full();
     system_state = SYSTEM_FREEING_INITMEM;
     kprobe_free_init_mem();
@@ -1655,8 +1080,7 @@ unsafe extern "C" fn kernel_init(unused: *mut c_void) -> int __ref {
     !try_to_run_init_process("/bin/sh")) {
     return 0;
     }
-    panic("No working init found.  Try passing init= option to kernel. "
-    "See Linux Documentation/admin-guide/init.rst for guidance.");
+    panic("No working init found.  Try passing init= option to kernel. See Linux Documentation/admin-guide/init.rst for guidance.");
     }
 // Open /dev/console, for stdin/stdout/stderr, this should never fail
 #[no_mangle]
@@ -1672,7 +1096,7 @@ pub unsafe extern "C" fn console_on_rootfs()  {
     fput(file);
     }
 #[no_mangle]
-unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
+unsafe extern "C" fn kernel_init_freeable()   {
 // Now the scheduler is fully set up and can do blocking allocations
     gfp_allowed_mask = __GFP_BITS_MASK;
 //
@@ -1683,7 +1107,7 @@ unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
     smp_prepare_cpus(setup_max_cpus);
     workqueue_init();
     init_mm_internals();
-    do_pre_smp_initcalls!();
+    do_pre_smp_initcalls();
     lockup_detector_init();
     smp_init();
     sched_init_smp();
@@ -1719,3 +1143,4 @@ unsafe extern "C" fn kernel_init_freeable() -> noinline void __init {
 //
 // forward_decl: egrity_load_keys;
     }
+}

@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -315,16 +344,18 @@ pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 
 // SPDX-License-Identifier: GPL-2.0
 
-    static struct file *in_file, *out_file;
-    static loff_t in_pos, out_pos;
-    int __initdata rd_image_start;		/* starting block # of image */
+pub static mut in_file: *mut file = core::ptr::null_mut();
+pub static mut out_file: *mut file = core::ptr::null_mut();
+pub static mut in_pos: usize = 0;
+pub static mut out_pos: usize = 0;
+// mangled field
 #[no_mangle]
 unsafe extern "C" fn ramdisk_start_setup(str: *mut c_char) -> c_int {
     pr_warn!("ramdisk_start= option is deprecated and will be removed soon\n");
     return kstrtoint(str, 0, &rd_image_start) == 0;
     }
     __setup!("ramdisk_start=", ramdisk_start_setup);
-    static int __init crd_load(decompress_fn deco);
+// forward_decl: crd_load;
 //
 // This routine tries to find a RAM disk image to load, and returns the
 // number of blocks to read for a non-compressed image, 0 if the image
@@ -344,10 +375,8 @@ unsafe extern "C" fn ramdisk_start_setup(str: *mut c_char) -> c_int {
 // lzo
 // lz4
 //
-    static int __init
-    identify_ramdisk_image(file *file, loff_t pos,
-    decompress_fn *decompressor)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn identify_ramdisk_image(file: *mut file, pos: loff_t, decompressor: *mut decompress_fn) -> c_int {
 pub static mut size: c_int = 512;
 pub static mut minixsb: *mut c_void = core::ptr::null_mut();
 pub static mut romfsb: *mut c_void = core::ptr::null_mut();
@@ -454,13 +483,15 @@ unsafe extern "C" fn nr_blocks(file: *mut file) -> c_ulong {
 #[no_mangle]
 pub unsafe extern "C" fn rd_load_image() -> c_int {
 pub static mut res: c_int = 0;
-    unsigned long rd_blocks, devblocks, nr_disks;
+pub static mut rd_blocks: usize = 0;
+pub static mut devblocks: usize = 0;
+pub static mut nr_disks: usize = 0;
     let mut nblocks = 0;
     let mut i = 0;
     let mut buf = core::ptr::null_mut();
 pub static mut rotate: c_ushort = 0;
 pub static mut decompressor: decompress_fn = 0;
-    char rotator[4] = { '|' , '/' , '-' , '\\' };
+pub static mut rotator: usize = 0;
     out_file = filp_open("/dev/ram", O_RDWR, 0);
     if (IS_ERR(out_file)) {
 // goto;
@@ -516,7 +547,7 @@ pub static mut decompressor: decompress_fn = 0;
     kernel_read(in_file, buf, BLOCK_SIZE, &in_pos);
     kernel_write(out_file, buf, BLOCK_SIZE, &out_pos);
     if (!IS_ENABLED!(CONFIG_S390) && !(i % 16)) {
-    pr_cont("%c\b", rotator[rotate & 0x3]);
+    pr_cont("%c\x08", rotator[rotate & 0x3]);
     rotate += 1;
     }
     }
@@ -532,10 +563,10 @@ pub static mut decompressor: decompress_fn = 0;
     init_unlink("/dev/ram");
     return res;
     }
-    static int exit_code;
-    static int decompress_error;
+pub static mut exit_code: usize = 0;
+pub static mut decompress_error: usize = 0;
 #[no_mangle]
-unsafe extern "C" fn compr_fill(buf: *mut c_void, len: c_ulong) -> long __init {
+unsafe extern "C" fn compr_fill(buf: *mut c_void, len: c_ulong) -> c_long  {
 pub static mut r: c_long = 0;
     if (r < 0) {
     printk!("RAMDISK: error while reading compressed data");
@@ -547,7 +578,7 @@ pub static mut r: c_long = 0;
     return r;
     }
 #[no_mangle]
-unsafe extern "C" fn compr_flush(window: *mut c_void, outcnt: c_ulong) -> long __init {
+unsafe extern "C" fn compr_flush(window: *mut c_void, outcnt: c_ulong) -> c_long  {
 pub static mut written: c_long = 0;
     if (written != outcnt) {
     if (decompress_error == 0) {
@@ -569,8 +600,7 @@ unsafe extern "C" fn error(x: *mut c_char)  {
 unsafe extern "C" fn crd_load(deco: decompress_fn) -> c_int {
     let mut result = 0;
     if (!deco) {
-    pr_emerg("Invalid ramdisk decompression routine.  "
-    "Select appropriate config option.\n");
+    pr_emerg("Invalid ramdisk decompression routine.  Select appropriate config option.\n");
     panic("Could not decompress initial ramdisk image.");
     }
     result = deco(core::ptr::null_mut(), 0, compr_fill, compr_flush, core::ptr::null_mut(), core::ptr::null_mut(), error);

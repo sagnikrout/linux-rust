@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -320,8 +349,8 @@ pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // Copyright (C) 1991, 1992  Linus Torvalds
 //
 
-    let mut lpj_fine = 0;
-    let mut preset_lpj = 0;
+    pub static mut lpj_fine: usize = 0;
+    pub static mut preset_lpj: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn lpj_setup(str: *mut c_char) -> c_int {
     return kstrtoul(str, 0, &preset_lpj) == 0;
@@ -337,13 +366,18 @@ unsafe extern "C" fn lpj_setup(str: *mut c_char) -> c_int {
 pub const MAX_DIRECT_CALIBRATION_RETRIES: c_int = 5;
 #[no_mangle]
 unsafe extern "C" fn calibrate_delay_direct() -> c_ulong {
-    unsigned long pre_start, start, post_start;
-    unsigned long pre_end, end, post_end;
+pub static mut pre_start: usize = 0;
+pub static mut start: usize = 0;
+pub static mut post_start: usize = 0;
+pub static mut pre_end: usize = 0;
+pub static mut end: usize = 0;
+pub static mut post_end: usize = 0;
     let mut start_jiffies = 0;
-    unsigned long timer_rate_min, timer_rate_max;
+pub static mut timer_rate_min: usize = 0;
+pub static mut timer_rate_max: usize = 0;
 pub static mut good_timer_sum: c_ulong = 0;
 pub static mut good_timer_count: c_ulong = 0;
-    unsigned long measured_times[MAX_DIRECT_CALIBRATION_RETRIES];
+    let mut measured_times = [0u8; 64];
     let mut max = -1; /* index of measured_times with max/min values or not set */
 pub static mut min: c_int = 0;
     let mut i = 0;
@@ -394,9 +428,7 @@ pub static mut min: c_int = 0;
 // >= 12.5% apart, redo calibration.
 //
     if (start >= post_end) {
-    printk!("calibrate_delay_direct() ignoring "
-    "timer_rate as we had a TSC wrap around"
-    " start=%lu >=post_end=%lu\n",
+    printk!("calibrate_delay_direct() ignoring timer_rate as we had a TSC wrap around start=%lu >=post_end=%lu\n",
     start, post_end);
     }
     if (start < post_end && pre_start != 0 && pre_end != 0 &&
@@ -433,14 +465,12 @@ pub static mut min: c_int = 0;
     good_timer_count = 0;
     if ((measured_times[max] - estimate) <
     (estimate - measured_times[min])) {
-    printk!("calibrate_delay_direct() dropping "
-    "min bogoMips estimate %d = %lu\n",
+    printk!("calibrate_delay_direct() dropping min bogoMips estimate %d = %lu\n",
     min, measured_times[min]);
     measured_times[min] = 0;
     min = max;
     } else {
-    printk!("calibrate_delay_direct() dropping "
-    "max bogoMips estimate %d = %lu\n",
+    printk!("calibrate_delay_direct() dropping max bogoMips estimate %d = %lu\n",
     max, measured_times[max]);
     measured_times[max] = 0;
     max = min;
@@ -459,9 +489,7 @@ pub static mut min: c_int = 0;
     }
     }
     }
-    printk!("calibrate_delay_direct() failed to get a good "
-    "estimate for loops_per_jiffy.\nProbably due to long platform "
-    "interrupts. Consider using \"lpj=\" boot option.\n");
+    printk!("calibrate_delay_direct() failed to get a good estimate for loops_per_jiffy.\nProbably due to long platform interrupts. Consider using \"lpj=\" boot option.\n");
     return 0;
     }
 
@@ -483,7 +511,12 @@ pub const LPS_PREC: c_int = 8;
 #[no_mangle]
 unsafe extern "C" fn calibrate_delay_converge() -> c_ulong {
 // First stage - slowly accelerate to find initial bounds
-    unsigned long lpj, lpj_base, ticks, loopadd, loopadd_base, chop_limit;
+pub static mut lpj: usize = 0;
+pub static mut lpj_base: usize = 0;
+pub static mut ticks: usize = 0;
+pub static mut loopadd: usize = 0;
+pub static mut loopadd_base: usize = 0;
+pub static mut chop_limit: usize = 0;
 pub static mut trials: c_int = 0;
     lpj = (1<<12);
 // wait for "start of" clock tick
@@ -493,14 +526,14 @@ pub static mut trials: c_int = 0;
     }
 // Go ..
     ticks = jiffies;
-    do {
-    if (++trial_in_band == (1<<band)) {
+    loop {
+    if (trial_in_band == (1<<band)) {
     band += 1;
     trial_in_band = 0;
     }
     __delay(lpj * band);
     trials += band;
-    } while (ticks == jiffies);
+    break; }
 //
 // We overshot, so retreat to a clear underestimate. Then estimate
 // the largest likely undershoot. This defines our chop bounds.
@@ -541,7 +574,7 @@ pub static mut trials: c_int = 0;
     }
     return lpj;
     }
-    static DEFINE_PER_CPU(unsigned long, cpu_loops_per_jiffy) = { 0 };
+pub static mut unsigned: usize = 0;
 //
 // Check if cpu calibration delay is already known. For example,
 // some processors with multi-core sockets may have all cores
@@ -550,14 +583,7 @@ pub static mut trials: c_int = 0;
 // Architectures should override this function if a faster calibration
 // method is available.
 //
-#[no_mangle]
-pub unsafe extern "C" fn __attribute__(calibrate_delay_is_known(void: (weak))) -> c_ulong {
-#[no_mangle]
-#[no_mangle]
-// duplicate fn: __attribute__
-pub unsafe extern "C" fn __attribute___dup(void: (weak)) calibrate_delay_is_known() -> c_ulong {
-    return 0;
-    }
+
 //
 // Indicate the cpu delay calibration is done. This can be used by
 // architectures to stop accepting delay timer registrations after this point.
@@ -565,45 +591,30 @@ pub unsafe extern "C" fn __attribute___dup(void: (weak)) calibrate_delay_is_know
 #[no_mangle]
 #[no_mangle]
 // duplicate fn: __attribute__
-#[no_mangle]
-// duplicate fn: __attribute___dup
-pub unsafe extern "C" fn __attribute___dup_dup(calibration_delay_done(void: (weak))) {
-#[no_mangle]
-#[no_mangle]
-// duplicate fn: __attribute__
-#[no_mangle]
-// duplicate fn: __attribute___dup
-#[no_mangle]
-// duplicate fn: __attribute___dup_dup
-pub unsafe extern "C" fn __attribute___dup_dup_dup(void: (weak)) calibration_delay_done() {
-    }
+
 #[no_mangle]
 pub unsafe extern "C" fn calibrate_delay() {
     let mut lpj = 0;
-    static bool printed;
+pub static mut printed: usize = 0;
 pub static mut this_cpu: c_int = 0;
     if (per_cpu(cpu_loops_per_jiffy, this_cpu)) {
     lpj = per_cpu(cpu_loops_per_jiffy, this_cpu);
     if (!printed) {
-    pr_info!("Calibrating delay loop (skipped) "
-    "already calibrated this CPU");
+    pr_info!("Calibrating delay loop (skipped) already calibrated this CPU");
     }
     } else if (preset_lpj) {
     lpj = preset_lpj;
     if (!printed) {
-    pr_info!("Calibrating delay loop (skipped) "
-    "preset value.. ");
+    pr_info!("Calibrating delay loop (skipped) preset value.. ");
     }
     } else if ((!printed) && lpj_fine) {
     lpj = lpj_fine;
-    pr_info!("Calibrating delay loop (skipped), "
-    "value calculated using timer frequency.. ");
+    pr_info!("Calibrating delay loop (skipped), value calculated using timer frequency.. ");
     } else if ((lpj = calibrate_delay_is_known())) {
     ;
     } else if ((lpj = calibrate_delay_direct()) != 0) {
     if (!printed) {
-    pr_info!("Calibrating delay using timer "
-    "specific routine.. ");
+    pr_info!("Calibrating delay using timer specific routine.. ");
     }
     } else {
     if (!printed) {
@@ -621,5 +632,3 @@ pub static mut this_cpu: c_int = 0;
     printed = true;
     calibration_delay_done();
     }
-}
-}

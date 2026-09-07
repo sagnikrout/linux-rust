@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -315,11 +344,12 @@ pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 
 // SPDX-License-Identifier: GPL-2.0
 
-    unsigned long initrd_start, initrd_end;
-    let mut initrd_below_start_ok = 0;
-pub static mut mount_initrd: int __initdata = 1;
-    phys_addr_t phys_initrd_start __initdata;
-    unsigned long phys_initrd_size __initdata;
+pub static mut initrd_start: usize = 0;
+pub static mut initrd_end: usize = 0;
+    pub static mut initrd_below_start_ok: usize = 0;
+pub static mut mount_initrd: c_int = 1;
+pub static mut phys_initrd_start: usize = 0;
+pub static mut phys_initrd_size: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn no_initrd(str: *mut c_char) -> c_int {
     pr_warn!("noinitrd option is deprecated and will be removed soon\n");
@@ -354,10 +384,7 @@ pub unsafe extern "C" fn initrd_load()  {
 // Load the initrd data into /dev/ram0.
 //
     if (rd_load_image()) {
-    pr_warn!("using deprecated initrd support, will be removed in January 2027; "
-    "use initramfs instead or (as a last resort) /sys/firmware/initrd; "
-    "see section \"Workaround\" in "
-    "https://lore.kernel.org/lkml/20251010094047.3111495-1-safinaskar@gmail.com\n");
+    pr_warn!("using deprecated initrd support, will be removed in January 2027; use initramfs instead or (as a last resort) /sys/firmware/initrd; see section \"Workaround\" in https://lore.kernel.org/lkml/20251010094047.3111495-1-safinaskar@gmail.com\n");
     }
     }
     init_unlink("/initrd.image");

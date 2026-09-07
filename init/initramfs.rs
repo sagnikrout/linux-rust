@@ -53,6 +53,7 @@ macro_rules! fs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! rootfs_initcall { ($($tt:tt)*) => {}; }
 macro_rules! device_initcall { ($($tt:tt)*) => {}; }
 macro_rules! late_initcall { ($($tt:tt)*) => {}; }
+macro_rules! pure_initcall { ($($tt:tt)*) => {}; }
 macro_rules! __setup { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_MUTEX { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE_SPINLOCK { ($($tt:tt)*) => {}; }
@@ -60,6 +61,8 @@ macro_rules! DEFINE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DECLARE_PER_CPU { ($($tt:tt)*) => {}; }
 macro_rules! DEFINE { ($($tt:tt)*) => {}; }
 macro_rules! ARRAY_SIZE { ($($tt:tt)*) => { 1 }; }
+macro_rules! min_t { ($($tt:tt)*) => { 0 }; }
+macro_rules! max_t { ($($tt:tt)*) => { 0 }; }
 macro_rules! container_of { ($($tt:tt)*) => { core::ptr::null_mut() }; }
 macro_rules! sizeof { ($($tt:tt)*) => { 0usize }; }
 macro_rules! MKDEV { ($($tt:tt)*) => { 0u32 }; }
@@ -74,6 +77,7 @@ macro_rules! list_for_each_entry { ($($tt:tt)*) => { if false }; }
 macro_rules! list_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! llist_for_each_entry_safe { ($($tt:tt)*) => { if false }; }
 macro_rules! pr_info_once { ($($tt:tt)*) => {}; }
+macro_rules! pr_warn_once { ($($tt:tt)*) => {}; }
 macro_rules! pr_info { ($($tt:tt)*) => {}; }
 macro_rules! pr_warn { ($($tt:tt)*) => {}; }
 macro_rules! pr_err { ($($tt:tt)*) => {}; }
@@ -158,6 +162,14 @@ pub struct ipc64_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub ke
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct ipc_perm { pub uid: uid_t, pub gid: gid_t, pub mode: mode_t, pub key: key_t, pub cuid: uid_t, pub cgid: gid_t, pub seq: u32 }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ipc_ids { pub _opaque: [u8; 0] }
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct kern_ipc_perm { pub _opaque: [u8; 0] }
 
 #[repr(C)]
@@ -232,6 +244,13 @@ pub type atomic_long_t = core::sync::atomic::AtomicI64;
 pub type key_t = i32;
 pub type kuid_t = u32;
 pub type kgid_t = u32;
+pub type compat_uptr_t = u32;
+pub type compat_long_t = i32;
+pub type compat_ulong_t = u32;
+pub type compat_size_t = u32;
+pub type __compat_uid_t = u32;
+pub type __compat_gid_t = u32;
+pub type compat_mode_t = u32;
 pub type int = c_int;
 pub type uint = c_uint;
 pub type ulong = c_ulong;
@@ -264,9 +283,12 @@ pub const ENFILE: c_int = 23;
 pub const EMFILE: c_int = 24;
 pub const ENOSPC: c_int = 28;
 pub const EROFS: c_int = 30;
+pub const ENOSYS: c_int = 38;
 pub const EIDRM: c_int = 43;
 pub const EOPNOTSUPP: c_int = 95;
 pub const ENOTSUPP: c_int = 524;
+pub const SHMLBA: usize = 4096;
+pub const COMPAT_SHMLBA: usize = 4096;
 
 // Standard File Mode Constants
 pub const S_IFCHR: u32 = 0x2000;
@@ -308,6 +330,13 @@ extern "C" {
 pub unsafe fn init_mkdir<T>(_path: T, _mode: u32) -> c_int { 0 }
 pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 // === KERNEL_MACRO_PRELUDE_END ===
+macro_rules! kunit_test_init_section_suites { ($($tt:tt)*) => {}; }
+macro_rules! kunit_test_suites { ($($tt:tt)*) => {}; }
+macro_rules! do_trace_initcall_level { ($($tt:tt)*) => {}; }
+macro_rules! do_one_initcall { ($($tt:tt)*) => {}; }
+macro_rules! do_initcall_level { ($($tt:tt)*) => {}; }
+
+
 
 
 
@@ -315,11 +344,10 @@ pub unsafe fn init_mknod<T>(_path: T, _mode: u32, _dev: u32) -> c_int { 0 }
 
 // SPDX-License-Identifier: GPL-2.0
 
-    static __initdata bool csum_present;
-    static __initdata u32 io_csum;
-    static ssize_t __init xwrite(file *file, const unsigned char *p,
-    size_t count, loff_t *pos)
-    {
+pub static mut csum_present: usize = 0;
+pub static mut io_csum: usize = 0;
+#[no_mangle]
+pub unsafe extern "C" fn xwrite(file: *mut file, p: *mut c_uchar, count: size_t, pos: *mut loff_t) -> ssize_t {
 pub static mut out: isize = 0;
 // sys_write only can write MAX_RW_COUNT aka 2G-4K bytes at most
     while (count) {
@@ -328,7 +356,7 @@ pub static mut rv: isize = 0;
     if (rv == -EINTR || rv == -EAGAIN) {
     continue;
     }
-    return out ? out : rv;
+    return if out { out } else { rv };
     } else if (rv == 0) {
     break;
     }
@@ -344,7 +372,7 @@ pub static mut rv: isize = 0;
     }
     return out;
     }
-    static __initdata char *message;
+pub static mut message: *mut c_void = core::ptr::null_mut();
 #[no_mangle]
 unsafe extern "C" fn error(x: *mut c_char)  {
     if (!message) {
@@ -352,30 +380,25 @@ unsafe extern "C" fn error(x: *mut c_char)  {
     }
     }
 
-    ({ show_mem(); panic(fmt, ##__VA_ARGS__); })
+// panic_show_mem macro stub
 // link hash
 
-    static __initdata struct hash {
-    let mut ino = 0;
-    let mut minor = 0;
-    let mut major = 0;
-    let mut mode;
-pub static mut next: *mut c_void = core::ptr::null_mut();
-    char name[N_ALIGN(PATH_MAX)];
-    } *head[32];
-    static __initdata bool hardlink_seen;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct hash { pub _opaque: [u8; 0] }
+pub static mut head: usize = 0;
+pub static mut hardlink_seen: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn hash(major: c_int, minor: c_int, ino: c_int) -> c_int {
 pub static mut tmp: c_ulong = 0;
     tmp += tmp >> 5;
     return tmp & 31;
     }
-    static char __init *find_link(int major, int minor, int ino,
-    umode_t mode, char *name)
-    {
+#[no_mangle]
+pub unsafe extern "C" fn find_link(major: c_int, minor: c_int, ino: c_int, mode: umode_t, name: *mut c_char) -> *mut c_void {
     let mut p = core::ptr::null_mut();
     let mut q = core::ptr::null_mut();
-    for (p = head + hash(major, minor, ino); *p; p = &(*p).next) {
+    while (*p) {
     if ((*p).ino != ino) {
     continue;
     }
@@ -428,7 +451,7 @@ unsafe extern "C" fn do_utime_path(path: *const path, mtime: time64_t)  {
 pub static mut timespec64: usize = 0;
     vfs_utimes(path, t);
     }
-    static __initdata LIST_HEAD(dir_list);
+pub static mut dir_list: usize = 0;
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct dir_entry {
@@ -453,30 +476,38 @@ pub static mut de: *mut c_void = core::ptr::null_mut();
 unsafe extern "C" fn dir_utime()  {
     let mut de = core::ptr::null_mut();
     let mut tmp = core::ptr::null_mut();
-    list_for_each_entry_safe(de, tmp, &dir_list, list) {
+    if false {
     list_del(&de.list);
     do_utime(de.name, de.mtime);
     kfree(de);
     }
     }
 
-    static void __init do_utime(char *filename, time64_t mtime) {}
-    static void __init do_utime_path(const struct path *path, time64_t mtime) {}
-    static void __init dir_add(const char *name, size_t nlen, time64_t mtime) {}
-    static void __init dir_utime(void) {}
+#[no_mangle]
+pub unsafe extern "C" fn do_utime(filename: *mut c_char, mtime: time64_t) {}
+#[no_mangle]
+pub unsafe extern "C" fn do_utime_path(path: *mut path, mtime: time64_t) {}
+#[no_mangle]
+pub unsafe extern "C" fn dir_add(name: *mut c_char, nlen: size_t, mtime: time64_t) {}
+#[no_mangle]
+pub unsafe extern "C" fn dir_utime() {}
 
-    static __initdata time64_t mtime;
+pub static mut mtime: usize = 0;
 // cpio header parsing
-    static __initdata unsigned long ino, major, minor, nlink;
-    static __initdata umode_t mode;
-    static __initdata unsigned long body_len, name_len;
-    static __initdata uid_t uid;
-    static __initdata gid_t gid;
-    static __initdata unsigned rdev;
-    static __initdata u32 hdr_csum;
+pub static mut ino: usize = 0;
+pub static mut major: usize = 0;
+pub static mut minor: usize = 0;
+pub static mut nlink: usize = 0;
+pub static mut mode: usize = 0;
+pub static mut body_len: usize = 0;
+pub static mut name_len: usize = 0;
+pub static mut uid: usize = 0;
+pub static mut gid: usize = 0;
+pub static mut rdev: usize = 0;
+pub static mut hdr_csum: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn parse_header(s: *mut c_char) -> c_int {
-    __be32 header[13];
+    let mut header = [0u8; 64];
     let mut ret = 0;
     ret = hex2bin(header, s + 6, sizeof!(header));
     if (ret) {
@@ -498,252 +529,11 @@ unsafe extern "C" fn parse_header(s: *mut c_char) -> c_int {
     return 0;
     }
 // Finite-state machine
-    static __initdata enum state {
-    Start,
-    Collect,
-    GotHeader,
-    SkipIt,
-    GotName,
-    CopyFile,
-    GotSymlink,
-    Reset
-    } state, next_state;
-    static __initdata char *victim;
-    static unsigned long byte_count __initdata;
-    static __initdata loff_t this_header, next_header;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct state { pub _opaque: [u8; 0] }
 #[no_mangle]
-pub unsafe extern "C" fn eat(n: unsigned)  {
-    victim += n;
-    this_header += n;
-    byte_count -= n;
-    }
-    static __initdata char *collected;
-    static long remains __initdata;
-    static __initdata char *collect;
-#[no_mangle]
-unsafe extern "C" fn read_into(buf: *mut c_char, size: unsigned, next: state)  {
-    if (byte_count >= size) {
-    collected = victim;
-    eat(size);
-    state = next;
-    } else {
-    collect = collected = buf;
-    remains = size;
-    next_state = next;
-    state = Collect;
-    }
-    }
-    static __initdata char *header_buf, *symlink_buf, *name_buf;
-#[no_mangle]
-unsafe extern "C" fn do_start() -> c_int {
-    read_into(header_buf, CPIO_HDRLEN, GotHeader);
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn do_collect() -> c_int {
-pub static mut n: c_ulong = 0;
-    if (byte_count < n) {
-    n = byte_count;
-    }
-    memcpy(collect, victim, n);
-    eat(n);
-    collect += n;
-    if ((remains -= n) != 0) {
-    return 1;
-    }
-    state = next_state;
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn do_header() -> c_int {
-    if (!memcmp(collected, "070701", 6)) {
-    csum_present = false;
-    } else if (!memcmp(collected, "070702", 6)) {
-    csum_present = true;
-    } else {
-    if (memcmp(collected, "070707", 6) == 0) {
-    error("incorrect cpio method used: use -H newc option");
-    }
-    else {
-    error("no cpio magic");
-    }
-    return 1;
-    }
-    if (parse_header(collected)) {
-    return 1;
-    }
-    next_header = this_header + N_ALIGN(name_len) + body_len;
-    next_header = (next_header + 3) & ~3;
-    state = SkipIt;
-    if (name_len <= 0 || name_len > PATH_MAX) {
-    return 0;
-    }
-    if (S_ISLNK(mode)) {
-    if (body_len > PATH_MAX) {
-    return 0;
-    }
-    collect = collected = symlink_buf;
-    remains = N_ALIGN(name_len) + body_len;
-    next_state = GotSymlink;
-    state = Collect;
-    return 0;
-    }
-    if (S_ISREG(mode) || !body_len) {
-    read_into(name_buf, N_ALIGN(name_len), GotName);
-    }
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn do_skip() -> c_int {
-    if (this_header + byte_count < next_header) {
-    eat(byte_count);
-    return 1;
-    } else {
-    eat(next_header - this_header);
-    state = next_state;
-    return 0;
-    }
-    }
-#[no_mangle]
-unsafe extern "C" fn do_reset() -> c_int {
-    while (byte_count && *victim == '\0') {
-    eat(1);
-    }
-    if (byte_count && (this_header & 3)) {
-    error("broken padding");
-    }
-    return 1;
-    }
-#[no_mangle]
-unsafe extern "C" fn clean_path(path: *mut c_char, fmode: umode_t)  {
-pub static mut st: usize = 0;
-    if (!init_stat(path, &st, AT_SYMLINK_NOFOLLOW) &&
-    (st.mode ^ fmode) & S_IFMT) {
-    if (S_ISDIR(st.mode)) {
-    init_rmdir(path);
-    }
-    else {
-    init_unlink(path);
-    }
-    }
-    }
-#[no_mangle]
-unsafe extern "C" fn maybe_link() -> c_int {
-    if (nlink >= 2) {
-    let mut old = find_link(major, minor, ino, mode, collected);
-    if (old) {
-    clean_path(collected, 0);
-    return (init_link(old, collected) < 0) ? -1 : 1;
-    }
-    }
-    return 0;
-    }
-    static __initdata struct file *wfile;
-    static __initdata loff_t wfile_pos;
-#[no_mangle]
-unsafe extern "C" fn do_name() -> c_int {
-    state = SkipIt;
-    next_state = Reset;
-// name_len > 0 && name_len <= PATH_MAX checked in do_header
-    if (collected[name_len - 1] != '\0') {
-    pr_err!("initramfs name without nulterm: %.*s\n",
-    (int)name_len, collected);
-    error("malformed archive");
-    return 1;
-    }
-    if (strcmp(collected, "TRAILER!!!") == 0) {
-    free_hash();
-    return 0;
-    }
-    clean_path(collected, mode);
-    if (S_ISREG(mode)) {
-pub static mut ml: c_int = 0;
-    if (ml >= 0) {
-pub static mut openflags: c_int = 0;
-    if (ml != 1) {
-    openflags |= O_TRUNC;
-    }
-    wfile = filp_open(collected, openflags, mode);
-    if (IS_ERR(wfile)) {
-    return 0;
-    }
-    wfile_pos = 0;
-    io_csum = 0;
-    vfs_fchown(wfile, uid, gid);
-    vfs_fchmod(wfile, mode);
-    if (body_len) {
-    vfs_truncate(&wfile.f_path, body_len);
-    }
-    state = CopyFile;
-    }
-    } else if (S_ISDIR(mode)) {
-    init_mkdir(collected, mode);
-    init_chown(collected, uid, gid, 0);
-    init_chmod(collected, mode);
-    dir_add(collected, name_len, mtime);
-    } else if (S_ISBLK(mode) || S_ISCHR(mode) ||
-    S_ISFIFO(mode) || S_ISSOCK(mode)) {
-    if (maybe_link() == 0) {
-    init_mknod(collected, mode, rdev);
-    init_chown(collected, uid, gid, 0);
-    init_chmod(collected, mode);
-    do_utime(collected, mtime);
-    }
-    }
-    return 0;
-    }
-#[no_mangle]
-unsafe extern "C" fn do_copy() -> c_int {
-    if (byte_count >= body_len) {
-    if (xwrite(wfile, victim, body_len, &wfile_pos) != body_len) {
-    error("write error");
-    }
-    do_utime_path(&wfile.f_path, mtime);
-    fput(wfile);
-    if (csum_present && io_csum != hdr_csum) {
-    error("bad data checksum");
-    }
-    eat(body_len);
-    state = SkipIt;
-    return 0;
-    } else {
-    if (xwrite(wfile, victim, byte_count, &wfile_pos) != byte_count) {
-    error("write error");
-    }
-    body_len -= byte_count;
-    eat(byte_count);
-    return 1;
-    }
-    }
-#[no_mangle]
-unsafe extern "C" fn do_symlink() -> c_int {
-    if (collected[name_len - 1] != '\0') {
-    pr_err!("initramfs symlink without nulterm: %.*s\n",
-    (int)name_len, collected);
-    error("malformed archive");
-    return 1;
-    }
-    collected[N_ALIGN(name_len) + body_len] = '\0';
-    clean_path(collected, 0);
-    init_symlink(collected + N_ALIGN(name_len), collected);
-    init_chown(collected, uid, gid, AT_SYMLINK_NOFOLLOW);
-    do_utime(collected, mtime);
-    state = SkipIt;
-    next_state = Reset;
-    return 0;
-    }
-    static __initdata int (*actions[])(void) = {
-    [Start]		= do_start,
-    [Collect]	= do_collect,
-    [GotHeader]	= do_header,
-    [SkipIt]	= do_skip,
-    [GotName]	= do_name,
-    [CopyFile]	= do_copy,
-    [GotSymlink]	= do_symlink,
-    [Reset]		= do_reset,
-    };
-#[no_mangle]
-unsafe extern "C" fn write_buffer(buf: *mut c_char, len: c_ulong) -> long __init {
+unsafe extern "C" fn write_buffer(buf: *mut c_char, len: c_ulong) -> c_long  {
     byte_count = len;
     victim = buf;
     while (!actions[state]()) {
@@ -752,7 +542,7 @@ unsafe extern "C" fn write_buffer(buf: *mut c_char, len: c_ulong) -> long __init
     return len - byte_count;
     }
 #[no_mangle]
-unsafe extern "C" fn flush_buffer(bufv: *mut c_void, len: c_ulong) -> long __init {
+unsafe extern "C" fn flush_buffer(bufv: *mut c_void, len: c_ulong) -> c_long  {
     let mut buf = bufv;
     let mut written = 0;
 pub static mut origLen: c_long = 0;
@@ -775,7 +565,7 @@ pub static mut c: c_char = 0;
     }
     return origLen;
     }
-    static unsigned long my_inptr __initdata; /* index of next byte to be processed in inbuf */
+// mangled field
 
 //
 // unpack_to_rootfs - decompress and extract an initramfs archive
@@ -787,15 +577,11 @@ pub static mut c: c_char = 0;
 // This symbol shouldn't be used externally. It's available for unit tests.
 //
 #[no_mangle]
-pub unsafe extern "C" fn unpack_to_rootfs(buf: *mut c_char, len: c_ulong) -> *mut char  __init {
+pub unsafe extern "C" fn unpack_to_rootfs(buf: *mut c_char, len: c_ulong) -> *mut char   {
     let mut written = 0;
     let mut decompress;
 pub static mut compress_name: *mut c_void = core::ptr::null_mut();
-    struct {
-    char header[CPIO_HDRLEN];
-    char symlink[PATH_MAX + N_ALIGN(PATH_MAX) + 1];
-    char name[N_ALIGN(PATH_MAX)];
-    } *bufs = kmalloc_obj(*bufs);
+    let mut bufs = core::ptr::null_mut();
     if (!bufs) {
     panic_show_mem("can't allocate buffers");
     }
@@ -849,7 +635,7 @@ pub static mut saved_offset: loff_t = 0;
     kfree(bufs);
     return message;
     }
-    static int __initdata do_retain_initrd;
+pub static mut do_retain_initrd: usize = 0;
 #[no_mangle]
 unsafe extern "C" fn retain_initrd_param(str: *mut c_char) -> c_int {
     if (*str) {
@@ -867,16 +653,16 @@ unsafe extern "C" fn keepinitrd_setup(__unused: *mut c_char) -> c_int {
     }
     __setup!("keepinitrd", keepinitrd_setup);
 
-pub static mut initramfs_async: bool __initdata = true;
+pub static mut initramfs_async: bool  = true;
 #[no_mangle]
 unsafe extern "C" fn initramfs_async_setup(str: *mut c_char) -> c_int {
     return kstrtobool(str, &initramfs_async) == 0;
     }
     __setup!("initramfs_async=", initramfs_async_setup);
-    extern char __initramfs_start[];
+extern "C" { pub static mut __initramfs_start: usize; }
 extern "C" { pub static mut __initramfs_size: usize; }
 
-    static BIN_ATTR(initrd, 0440, sysfs_bin_attr_simple_read, core::ptr::null_mut(), 0);
+pub static mut initrd: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn reserve_initrd_mem()  {
     let mut start;
@@ -897,17 +683,17 @@ pub unsafe extern "C" fn reserve_initrd_mem()  {
     size = round_up(size, PAGE_SIZE);
     if (!memblock_is_region_memory(start, size)) {
     pr_err!("INITRD: 0x%08llx+0x%08lx is not a memory region",
-    (u64)start, size);
+    start, size);
 // goto;
     }
     if (memblock_is_region_reserved(start, size)) {
     pr_err!("INITRD: 0x%08llx+0x%08lx overlaps in-use memory region\n",
-    (u64)start, size);
+    start, size);
 // goto;
     }
     memblock_reserve(start, size);
 // Now convert initrd to virtual addresses
-    initrd_start = (unsigned long)__va(phys_initrd_start);
+    initrd_start = __va(phys_initrd_start);
     initrd_end = initrd_start + phys_initrd_size;
     initrd_below_start_ok = 1;
     return;
@@ -917,13 +703,13 @@ pub unsafe extern "C" fn reserve_initrd_mem()  {
     initrd_end = 0;
     }
 #[no_mangle]
-pub unsafe extern "C" fn free_initrd_mem(start: c_ulong, end: c_ulong) -> void __weak __init {
+pub unsafe extern "C" fn free_initrd_mem(start: c_ulong, end: c_ulong)    {
     free_reserved_area(start, end, POISON_FREE_INITMEM,
     "initrd");
     }
 
 #[no_mangle]
-unsafe extern "C" fn kexec_free_initrd() -> bool __init {
+unsafe extern "C" fn kexec_free_initrd() -> bool  {
 pub static mut crashk_start: c_ulong = 0;
 pub static mut crashk_end: c_ulong = 0;
 //
@@ -998,7 +784,7 @@ unsafe extern "C" fn unpack_initramfs(cookie: async_cookie_t)  {
     }
 #[no_mangle]
 unsafe extern "C" fn do_populate_rootfs(unused: *mut c_void, cookie: async_cookie_t)  {
-    scoped_with_init_fs() {
+    if true {
     unpack_initramfs(cookie);
     security_initramfs_populated();
     }
@@ -1019,8 +805,8 @@ unsafe extern "C" fn do_populate_rootfs(unused: *mut c_void, cookie: async_cooki
     initrd_end = 0;
     init_flush_fput();
     }
-    static ASYNC_DOMAIN_EXCLUSIVE(initramfs_domain);
-    static async_cookie_t initramfs_cookie;
+pub static mut initramfs_domain: usize = 0;
+pub static mut initramfs_cookie: usize = 0;
 #[no_mangle]
 pub unsafe extern "C" fn wait_for_initramfs() {
     if (!initramfs_cookie) {
@@ -1030,12 +816,12 @@ pub unsafe extern "C" fn wait_for_initramfs() {
 // note, avoid deadlocking the machine, and let the
 // caller's access fail as it used to.
 //
-    pr_warn_once("wait_for_initramfs() called before rootfs_initcalls\n");
+    pr_warn_once!("wait_for_initramfs() called before rootfs_initcalls\n");
     return;
     }
     async_synchronize_cookie_domain(initramfs_cookie + 1, &initramfs_domain);
     }
-    EXPORT_SYMBOL_GPL(wait_for_initramfs);
+    EXPORT_SYMBOL_GPL!(wait_for_initramfs);
 #[no_mangle]
 unsafe extern "C" fn populate_rootfs() -> c_int {
     initramfs_cookie = async_schedule_domain(do_populate_rootfs, core::ptr::null_mut(),
